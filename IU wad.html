@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!-- 
+    link for react
+    link for bootstrap 5 
+    a form with a select that selects a computer component cpu, gpu, motherboard,
+    ram, power supply, monitor, case 
+  -->
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+  <title>IU WAD</title>
+</head>
+<body>
+  <div class="container">
+    <h2 class="h2">Build your PC by choosing a product from each component category</h2>
+    <form id="form">
+      <!-- <div class="mb-3">
+        <label for="select-component" class="form-label">Component Category</label>
+        <select id="select-component" class="form-select" aria-label="Default select example">
+          <option selected value="cpu">CPU</option>
+          <option value="gpu">GPU</option>
+          <option value="motherboard">Motherboard</option>
+        </select>
+      </div> -->
+      <div class="mb-3">
+        <label for="select-component-cpu" class="form-label">CPU</label>
+        <select id="select-component-cpu" class="form-select" aria-label="Default select example">
+          <option selected value="ryz9">Ryzen 9 7950X3D 595$</option>
+          <option value="ryz7">Ryzen 7 7800X3D 365$</option>
+          <option value="ryz5">Ryzen 5 7600X 230$</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="select-component-gpu" class="form-label">GPUs Nvidia RTX</label>
+        <select id="select-component-gpu" class="form-select" aria-label="Default select example">
+          <option selected value="rtx80">RTX 4080 1490$</option>
+          <option value="rtx70">RTX 4070 715$</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="select-component-motherboard" class="form-label">AM5 Motherboards</label>
+        <select id="select-component-motherboard" class="form-select" aria-label="Default select example">
+          <option selected value="asrock">ASRock B650M Pro wifi 140$</option>
+          <option value="msi">MSI pro B650M-P 120$</option>
+          <option value="asus">ASUS TUF gaming B650M-Plus wifi 200$</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <p id="totalText"></p>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script>
+    let cpuSelect = document.getElementById("select-component-cpu")
+    let gpuSelect = document.getElementById("select-component-gpu")
+    let motherboardSelect = document.getElementById("select-component-motherboard")
+    let total = 0
+    document.addEventListener("DOMContentLoaded", getTotal)
+    let selects = Array.from(document.getElementsByClassName("form-select"))
+    selects.forEach(elm => elm.addEventListener("change", getTotal))
+    function getTotal(e){
+      e.preventDefault()
+      let selectedCPU = cpuSelect.value
+      let selectedGPU = gpuSelect.value
+      let selectedMotherboard = motherboardSelect.value
+      let valuesWorth = { rtx70: 715, rtx80: 1490, asrock: 140, msi: 120, asus: 200, ryz9: 595, ryz7: 365, ryz5: 230 }
+      total = valuesWorth[selectedCPU] + valuesWorth[selectedGPU] + valuesWorth[selectedMotherboard]
+      document.getElementById("totalText").innerText = `${total} $`
+    }
+    document.getElementById("form").addEventListener("submit", function(e){
+      e.preventDefault();
+      let selected = {cpu: cpuSelect.value, gpu: gpuSelect.value, motherboard: motherboardSelect.value, total}
+      console.log(selected)
+    })
+  </script>
+</body>
+</html>
